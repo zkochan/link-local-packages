@@ -4,7 +4,7 @@ import linkLocalPackages from '.'
 
 const args = process.argv.slice(2)
 
-const root = args[0] 
+const root = args[0]
   ? path.resolve(args[0])
   : process.cwd()
 
