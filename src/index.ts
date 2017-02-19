@@ -26,7 +26,7 @@ export default async function (
   root: string,
   opts?: { ignore?: string[] }
 ) {
-  const pkgs = await findPackages(root, {
+  const pkgs: Package[] = await findPackages(root, {
     ignore: opts && opts.ignore
   })
 
@@ -36,6 +36,7 @@ export default async function (
 
   function linkDeps(pkg: Package) {
     Promise.all(Object.keys(pkg.manifest.dependencies || {})
+      .filter(depName => pkgs.some(pkg => pkg.manifest.name === depName))
       .map(depName => {
         const range = pkg.manifest.dependencies[depName]
         const major = majors(range)[0]
