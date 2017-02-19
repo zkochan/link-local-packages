@@ -1,5 +1,7 @@
 # link-local-packages
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zkochan/link-local-packages.svg)](https://greenkeeper.io/)
+
 > Link packages from the local file system, when available
 
 [![npm version](https://img.shields.io/npm/v/link-local-packages.svg)](https://www.npmjs.com/package/link-local-packages) [![Build Status](https://img.shields.io/travis/zkochan/link-local-packages/master.svg)](https://travis-ci.org/zkochan/link-local-packages)
