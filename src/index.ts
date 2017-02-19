@@ -39,7 +39,7 @@ export default async function (
       .filter(depName => pkgs.some(pkg => pkg.manifest.name === depName))
       .map(depName => {
         const range = pkg.manifest.dependencies[depName]
-        const major = majors(range)[0]
+        const major = getMajorFromRange(range)
         return `${depName}@${major}`
       })
       .map(pkgMajorId => pkgMap[pkgMajorId])
@@ -48,6 +48,13 @@ export default async function (
       .map(dependency => link(pkg, dependency))
     )
   }
+}
+
+function getMajorFromRange(range: string): string {
+  const major = majors(range)[0]
+  const index = major.indexOf('.')
+  if (index === -1) return major
+  return major.substr(0, index)
 }
 
 function createPkgMap(pkgs: Package[]): {
