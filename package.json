@@ -21,6 +21,7 @@
   "keywords": [
     "link",
     "local",
+    "monorepo",
     "package"
   ],
   "author": "Zoltan Kochan",
