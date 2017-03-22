@@ -14,7 +14,13 @@ type Manifest = {
   version: string,
   dependencies: {
     [name: string]: string,
-  }
+  },
+  devDependencies: {
+    [name: string]: string,
+  },
+  optionalDependencies: {
+    [name: string]: string,
+  },
 }
 
 type Package = {
@@ -35,16 +41,20 @@ export default async function (
   Promise.all(Object.keys(pkgMap).map(name => linkDeps(pkgMap[name])))
 
   function linkDeps(pkg: Package) {
-    Promise.all(Object.keys(pkg.manifest.dependencies || {})
+    const dependencies = Object.assign({},
+      pkg.manifest.devDependencies,
+      pkg.manifest.optionalDependencies,
+      pkg.manifest.dependencies)
+    Promise.all(Object.keys(dependencies)
       .filter(depName => pkgs.some(pkg => pkg.manifest.name === depName))
       .map(depName => {
-        const range = pkg.manifest.dependencies[depName]
+        const range = dependencies[depName]
         const major = getMajorFromRange(range)
         return `${depName}@${major}`
       })
       .map(pkgMajorId => pkgMap[pkgMajorId])
       .filter(Boolean)
-      .filter(dependency => areCompatible(pkg.manifest, dependency.manifest))
+      .filter(dependency => areCompatible(pkg.manifest.name, dependencies[dependency.manifest.name], dependency.manifest))
       .map(dependency => link(pkg, dependency))
     )
   }
@@ -72,15 +82,15 @@ function createPkgMajorId(name: string, version: string) {
   return `${name}@${major}`
 }
 
-function areCompatible(dependent: Manifest, dependency: Manifest) {
-  if (semver.satisfies(dependency.version, dependent.dependencies[dependency.name])) {
+function areCompatible(dependentName: string, dependentRange: string, dependency: Manifest) {
+  if (semver.satisfies(dependency.version, dependentRange)) {
     return true
   }
   const available = `${dependency.name}@${dependency.version}`
-  const needed = `${dependency.name}@${dependent.dependencies[dependency.name]}`
+  const needed = `${dependency.name}@${dependentRange}`
   console.warn(oneLine`
     Local ${highlight(available)}
-    cannot be used by ${highlight(dependent.name)} which needs
+    cannot be used by ${highlight(dependentName)} which needs
     ${highlight(needed)}
   `)
   return false
