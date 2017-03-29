@@ -34,7 +34,7 @@
     "@types/tape": "^4.2.29",
     "tape": "^4.6.3",
     "ts-node": "^3.0.1",
-    "tslint": "^4.4.2",
+    "tslint": "^5.0.0",
     "typescript": "^2.1.6"
   },
   "dependencies": {
