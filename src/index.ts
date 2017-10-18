@@ -2,7 +2,7 @@ import findPackages from 'find-packages'
 import semver = require('semver')
 import majors = require('major-versions')
 import commonTags = require('common-tags')
-import chalk = require('chalk')
+import chalk from 'chalk'
 import path = require('path')
 import symlinkDir from 'symlink-dir'
 
