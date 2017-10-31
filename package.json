@@ -43,7 +43,7 @@
     "tape": "^4.6.3",
     "ts-node": "^3.0.1",
     "tslint": "^5.0.0",
-    "typescript": "^2.1.6"
+    "typescript": "2.5.3"
   },
   "dependencies": {
     "@types/common-tags": "^1.2.5",
