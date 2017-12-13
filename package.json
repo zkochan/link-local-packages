@@ -10,7 +10,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "lint": "tslint -c tslint.json --project .",
-    "test": "npm run lint && ts-node test",
+    "test": "npm run lint && ts-node test --type-check",
     "tsc": "tsc",
     "prepublish": "npm run tsc"
   },
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/tape": "^4.2.29",
     "tape": "^4.6.3",
-    "ts-node": "^3.0.1",
+    "ts-node": "^4.0.1",
     "tslint": "^5.0.0",
     "typescript": "^2.1.6"
   },
@@ -51,7 +51,7 @@
     "@types/semver": "^5.3.30",
     "chalk": "^2.0.1",
     "common-tags": "^1.4.0",
-    "find-packages": "^2.0.0",
+    "find-packages": "^2.1.2",
     "major-versions": "^2.0.0",
     "semver": "^5.3.0",
     "symlink-dir": "^1.0.1"
