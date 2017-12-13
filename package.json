@@ -10,7 +10,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "lint": "tslint -c tslint.json --project .",
-    "test": "npm run lint && ts-node test --type-check",
+    "test": "npm run lint && preview && ts-node test --type-check",
     "tsc": "tsc",
     "prepublish": "npm run tsc"
   },
@@ -40,6 +40,7 @@
   "homepage": "https://github.com/zkochan/link-local-packages#readme",
   "devDependencies": {
     "@types/tape": "^4.2.29",
+    "package-preview": "^1.0.3",
     "tape": "^4.6.3",
     "ts-node": "^4.0.1",
     "tslint": "^5.0.0",
